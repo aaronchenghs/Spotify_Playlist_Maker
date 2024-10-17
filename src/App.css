@@ -1,0 +1,18 @@
+@import "./_theme.css";
+
+#root {
+  text-align: center;
+  font-family: var(--primaryFont);
+  color: var(--textColor);
+}
+button {
+  cursor: pointer;
+}
+
+body,
+html {
+  margin: 0px;
+  -webkit-font-smoothing: antialiased; /* For WebKit-based browsers */
+  -moz-osx-font-smoothing: grayscale; /* For Firefox on macOS */
+  text-rendering: optimizeLegibility; /* Improve readability */
+}

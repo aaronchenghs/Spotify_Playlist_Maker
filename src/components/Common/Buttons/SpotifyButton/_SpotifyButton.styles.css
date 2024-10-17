@@ -1,0 +1,32 @@
+@import "../../../../_theme.css";
+
+.spotifyButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--spotifyGreen);
+  font-family: var(--primaryFont);
+  color: var(--spotifyBlack);
+  text-transform: none;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: bolder;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+  border: solid;
+}
+
+.spotifyButton:hover {
+  background-color: darken(var(--spotifyGreen), 20%);
+}
+
+.spotifyButton:active {
+  transition: background-color 0.1s ease;
+  background-color: var(--spotifyGreen);
+}
+
+.spotifyButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px darken(var(--spotifyGreen), 15%);
+}

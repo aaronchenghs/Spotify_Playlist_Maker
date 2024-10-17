@@ -1,0 +1,104 @@
+@import "../../_theme.css";
+
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  color: var(--textColor);
+  font-family: var(--primaryFont);
+}
+
+.landing-header {
+  text-align: center;
+  padding: 2rem;
+  padding-bottom: 0px;
+}
+
+.landing-header h1 {
+  font-size: 2.5rem;
+  color: var(--accentColor);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.landing-header p {
+  font-size: 1.3rem;
+  color: var(--textColor);
+  margin-top: 0.5rem;
+}
+
+.landing-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  flex-grow: 1;
+}
+
+.features {
+  margin-bottom: 2rem;
+  text-align: start;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.features h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--accentColor);
+}
+
+.features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features ul li {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--textColor);
+  font-weight: bold;
+}
+
+.landing-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 1rem;
+  color: var(--textColor);
+  background-color: var(--accentColor);
+  color: var(--spotifyBlack);
+  letter-spacing: 1px;
+  border-top: 2px solid var(--spotifyBlack);
+}
+
+@media (min-width: 768px) {
+  .landing-header h1 {
+    font-size: 3.5rem;
+  }
+
+  .landing-header p {
+    font-size: 1.5rem;
+  }
+
+  .features h2 {
+    font-size: 2.2rem;
+  }
+
+  .features ul li {
+    font-size: 1.4rem;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

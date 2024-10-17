@@ -1,0 +1,21 @@
+@import "../../../_theme.css";
+
+.accentTypography {
+  font-family: var(--primaryFont);
+  color: black;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.invertedAccentTyography {
+  font-family: var(--primaryFont);
+  color: var(--backgroundColor);
+}
+
+.accent {
+  color: var(--accentColor);
+}
