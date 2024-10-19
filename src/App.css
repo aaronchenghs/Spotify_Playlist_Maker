@@ -16,3 +16,10 @@ html {
   -moz-osx-font-smoothing: grayscale; /* For Firefox on macOS */
   text-rendering: optimizeLegibility; /* Improve readability */
 }
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
