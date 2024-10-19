@@ -12,7 +12,6 @@ const SCOPES = [
 ].join("%20");
 
 export const getSpotifyAuthUrl = () => {
-  console.log(CLIENT_ID, REDIRECT_URI);
   return `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPES}`;
 };
 
