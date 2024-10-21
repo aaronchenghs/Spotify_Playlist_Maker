@@ -5,6 +5,7 @@ import SpotifyLogo from "../../assets/spotify-logo.svg";
 import { AppName } from "../../global";
 import "./_Landing.styles.css";
 import { getSpotifyAuthUrl } from "../../spotifyAuth";
+import { CopyFooter } from "../Common/CopyFooter/CopyFooter";
 
 const Landing: React.FC = () => {
   const handleSpotifyLogin = () => {
@@ -38,19 +39,7 @@ const Landing: React.FC = () => {
           </MainTextTypography>
         </SpotifyButton>
       </main>
-      <footer className="landing-footer">
-        <p>
-          &copy; 2024 {AppName}. Project by{" "}
-          <a
-            href={"https://aaroncheng.netlify.app/"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Aaron Cheng
-          </a>
-          .
-        </p>
-      </footer>
+      {CopyFooter}
     </div>
   );
 };
