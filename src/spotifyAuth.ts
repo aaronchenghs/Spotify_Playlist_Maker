@@ -1,7 +1,10 @@
 // src/utils/spotifyAuth.ts
 
 const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-const REDIRECT_URI = import.meta.env.VITE_SPOTIFY_REDIRECT_URI;
+const REDIRECT_URI =
+  window.location.hostname === "localhost"
+    ? import.meta.env.VITE_SPOTIFY_REDIRECT_URI_LOCAL
+    : import.meta.env.VITE_SPOTIFY_REDIRECT_URI_PROD;
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
 const SCOPES = [
