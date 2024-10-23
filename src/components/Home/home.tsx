@@ -2,9 +2,12 @@ import React, { useState, useEffect, useMemo } from "react";
 import "./_Home.styles.css";
 import { CopyFooter } from "../Common/CopyFooter/CopyFooter";
 import MainTextTypography from "../Common/MainTextTypography/MainTextTypography";
+import ChoosePlaylist from "./Steps/ExistingPlaylist/ChoosePlaylist/ChoosePlaylist";
+import ChooseFilters from "./Steps/ExistingPlaylist/ChooseFilters/ChooseFilters";
+import NavigationHeader from "./NavigationHeader";
 
 const CreateSteps: React.ReactNode[] = [];
-const FilterSteps: React.ReactNode[] = [];
+const FilterSteps: React.ReactNode[] = [<ChoosePlaylist />, <ChooseFilters />];
 
 type Choice = "create" | "filter";
 
@@ -37,7 +40,6 @@ const Home: React.FC = () => {
   };
 
   const content = useMemo(() => {
-    console.log("HELLO");
     if (step === 0) {
       return <ChooseContent onChoose={handleChoice} />;
     }
@@ -59,7 +61,18 @@ const Home: React.FC = () => {
   return footerVisible ? (
     initialContent
   ) : (
-    <div className="homeContainer">{content}</div>
+    <div className="homeContainer">
+      {step > 0 && (
+        <NavigationHeader
+          step={step}
+          totalSteps={
+            choice === "create" ? CreateSteps.length : FilterSteps.length
+          }
+          setStep={setStep}
+        />
+      )}
+      {content}
+    </div>
   );
 };
 
@@ -72,14 +85,18 @@ interface ChooseContentProps {
 const ChooseContent: React.FC<ChooseContentProps> = ({ onChoose }) => {
   return (
     <div className="step0Container">
-      <button onClick={() => onChoose("create")}>Create a New Playlist</button>
+      <button onClick={() => onChoose("filter")}>
+        Filter an Existing Playlist
+      </button>
+
       <div className="divider">
         <MainTextTypography tag="h3">
           <i>What would you like to do?</i>
         </MainTextTypography>
       </div>
-      <button onClick={() => onChoose("filter")}>
-        Filter an Existing Playlist
+
+      <button onClick={() => onChoose("create")}>
+        Generate a New Playlist
       </button>
     </div>
   );

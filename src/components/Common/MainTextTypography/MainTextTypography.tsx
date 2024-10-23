@@ -1,5 +1,5 @@
 import React from "react";
-import "./_MainTextTypography.styles.css";
+import "./_MainTextTypography.styles.scss";
 
 type MainTextTypographyProps = {
   tag?: "body" | "p" | "label" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";

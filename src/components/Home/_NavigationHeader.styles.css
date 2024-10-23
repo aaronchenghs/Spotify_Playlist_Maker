@@ -1,0 +1,17 @@
+@import "../../_theme.css";
+
+.navigation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--accentColor);
+  border-bottom: 2px solid var(--backgroundColor);
+  min-height: 30px;
+  height: 6vh;
+}
+
+.header-button {
+  border: 0px solid;
+  width: 80px;
+  height: 100%;
+}

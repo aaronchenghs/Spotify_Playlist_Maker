@@ -12,6 +12,7 @@
 }
 
 .invertedAccentTyography {
+  @extend .accentTypography;
   font-family: var(--primaryFont);
   color: var(--backgroundColor);
 }
