@@ -1,17 +1,19 @@
 @import "../../_theme.css";
 
 .navigation-header {
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--accentColor);
   border-bottom: 2px solid var(--backgroundColor);
-  min-height: 30px;
+  z-index: 1000;
   height: 6vh;
 }
 
 .header-button {
   border: 0px solid;
-  width: 80px;
+  width: 100px;
   height: 100%;
 }

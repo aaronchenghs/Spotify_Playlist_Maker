@@ -6,8 +6,8 @@ import ChoosePlaylist from "./Steps/ExistingPlaylist/ChoosePlaylist/ChoosePlayli
 import ChooseFilters from "./Steps/ExistingPlaylist/ChooseFilters/ChooseFilters";
 import NavigationHeader from "./NavigationHeader";
 
-const CreateSteps: React.ReactNode[] = [];
 const FilterSteps: React.ReactNode[] = [<ChoosePlaylist />, <ChooseFilters />];
+const CreateSteps: React.ReactNode[] = [];
 
 type Choice = "create" | "filter";
 
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
       return <ChooseContent onChoose={handleChoice} />;
     }
 
-    return choice === "create" ? CreateSteps[step] : FilterSteps[step];
+    return choice === "create" ? CreateSteps[step - 1] : FilterSteps[step - 1];
   }, [step, choice]);
 
   const initialContent = (
@@ -78,6 +78,8 @@ const Home: React.FC = () => {
 
 export default Home;
 
+// region ChooseContent.tsx
+
 interface ChooseContentProps {
   onChoose: (choice: Choice) => void;
 }
@@ -85,9 +87,9 @@ interface ChooseContentProps {
 const ChooseContent: React.FC<ChooseContentProps> = ({ onChoose }) => {
   return (
     <div className="step0Container">
-      <button onClick={() => onChoose("filter")}>
+      <div className="choicePicker" onClick={() => onChoose("filter")}>
         Filter an Existing Playlist
-      </button>
+      </div>
 
       <div className="divider">
         <MainTextTypography tag="h3">
@@ -95,9 +97,9 @@ const ChooseContent: React.FC<ChooseContentProps> = ({ onChoose }) => {
         </MainTextTypography>
       </div>
 
-      <button onClick={() => onChoose("create")}>
+      <div className="choicePicker" onClick={() => onChoose("create")}>
         Generate a New Playlist
-      </button>
+      </div>
     </div>
   );
 };
