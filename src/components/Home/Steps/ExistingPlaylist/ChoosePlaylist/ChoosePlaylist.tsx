@@ -3,9 +3,27 @@ import "./_ChoosePlaylist.styles.css";
 import { getUserPlaylists, Playlist } from "../../../../../spotifyServices";
 import { getAccessTokenFromUrl } from "../../../../../spotifyAuth";
 import MainTextTypography from "../../../../Common/MainTextTypography/MainTextTypography";
+import { FilterPlaylistState } from "../../../../../Models/FilterPlaylistModels";
 
-const ChoosePlaylist = () => {
+interface ChoosePlaylistProps {
+  filterPlaylistState: FilterPlaylistState;
+  setFilterPlaylistState: React.Dispatch<
+    React.SetStateAction<FilterPlaylistState>
+  >;
+}
+
+const ChoosePlaylist = ({
+  filterPlaylistState,
+  setFilterPlaylistState,
+}: ChoosePlaylistProps) => {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
+
+  const onPlaylistClick = (playlist: Playlist) => {
+    setFilterPlaylistState((prevState) => ({
+      ...prevState,
+      playlist,
+    }));
+  };
 
   useEffect(() => {
     const fetchPlaylists = async () => {
@@ -21,9 +39,19 @@ const ChoosePlaylist = () => {
 
   return (
     <div className="playlist-grid">
-      {playlists.map((playlist) => (
-        <PlaylistBlock key={playlist.id} playlist={playlist} />
-      ))}
+      {playlists.map((playlist) => {
+        const isThisPlaylistSelected =
+          filterPlaylistState.playlist?.id === playlist.id;
+
+        return (
+          <PlaylistBlock
+            key={playlist.id}
+            onClick={onPlaylistClick}
+            playlist={playlist}
+            isSelected={isThisPlaylistSelected}
+          />
+        );
+      })}
     </div>
   );
 };
@@ -31,12 +59,21 @@ const ChoosePlaylist = () => {
 export default ChoosePlaylist;
 
 interface PlaylistBlockProps {
+  onClick: (playlist: Playlist) => void;
+  isSelected: boolean;
   playlist: Playlist;
 }
 
-const PlaylistBlock: React.FC<PlaylistBlockProps> = ({ playlist }) => {
+const PlaylistBlock: React.FC<PlaylistBlockProps> = ({
+  playlist,
+  onClick,
+  isSelected,
+}) => {
   return (
-    <div className="playlist-block">
+    <div
+      className={`playlist-block ${isSelected && "selected"}`}
+      onClick={() => onClick(playlist)}
+    >
       <div className="image-container">
         {playlist.images.length > 0 && (
           <img

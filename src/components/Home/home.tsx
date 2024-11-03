@@ -5,9 +5,10 @@ import MainTextTypography from "../Common/MainTextTypography/MainTextTypography"
 import ChoosePlaylist from "./Steps/ExistingPlaylist/ChoosePlaylist/ChoosePlaylist";
 import ChooseFilters from "./Steps/ExistingPlaylist/ChooseFilters/ChooseFilters";
 import NavigationHeader from "./NavigationHeader";
-
-const FilterSteps: React.ReactNode[] = [<ChoosePlaylist />, <ChooseFilters />];
-const CreateSteps: React.ReactNode[] = [];
+import {
+  DEFAULT_FILTER_STATE,
+  FilterPlaylistState,
+} from "../../Models/FilterPlaylistModels";
 
 type Choice = "create" | "filter";
 
@@ -15,10 +16,18 @@ const Home: React.FC = () => {
   // Animation state
   const [contentHeight, setContentHeight] = useState("85vh");
   const [footerVisible, setFooterVisible] = useState(true);
+
+  const [filterPlaylistState, setFilterPlaylistState] =
+    useState<FilterPlaylistState>(DEFAULT_FILTER_STATE);
+
   // Step State
   const [choice, setChoice] = useState<Choice>("create");
   const [step, setStep] = useState(0);
 
+  /**
+   * Animation effect to hide the footer and content
+   * when the component is first mounted.
+   */
   useEffect(() => {
     const timeoutHeight = setTimeout(() => {
       setContentHeight("0px");
@@ -39,13 +48,49 @@ const Home: React.FC = () => {
     setStep(1);
   };
 
+  const FilterSteps = useMemo(
+    () => [
+      () => (
+        <ChoosePlaylist
+          filterPlaylistState={filterPlaylistState}
+          setFilterPlaylistState={setFilterPlaylistState}
+        />
+      ),
+      () => (
+        <ChooseFilters
+          filterPlaylistState={filterPlaylistState}
+          setFilterPlaylistState={setFilterPlaylistState}
+        />
+      ),
+    ],
+    [filterPlaylistState]
+  );
+
+  const CreateSteps = useMemo(
+    () => [
+      () => (
+        <div>
+          <MainTextTypography tag="h3">Create Step 1</MainTextTypography>
+        </div>
+      ),
+      () => (
+        <div>
+          <MainTextTypography tag="h3">Create Step 2</MainTextTypography>
+        </div>
+      ),
+    ],
+    []
+  );
+
   const content = useMemo(() => {
     if (step === 0) {
       return <ChooseContent onChoose={handleChoice} />;
     }
 
-    return choice === "create" ? CreateSteps[step - 1] : FilterSteps[step - 1];
-  }, [step, choice]);
+    return choice === "create"
+      ? CreateSteps[step - 1]()
+      : FilterSteps[step - 1]();
+  }, [step, choice, CreateSteps, FilterSteps]);
 
   const initialContent = (
     <div
