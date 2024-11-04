@@ -21,7 +21,7 @@ const ChoosePlaylist = ({
   const onPlaylistClick = (playlist: Playlist) => {
     setFilterPlaylistState((prevState) => ({
       ...prevState,
-      playlist,
+      playlist: prevState.playlist?.id === playlist.id ? null : playlist,
     }));
   };
 
